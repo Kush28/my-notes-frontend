@@ -23,11 +23,11 @@ export default function HeroPost() {
           <p className="text-xl font-bold leading-relaxed my-4">
             Garbage Packing:{" "}
           </p>
-          <Avatar name="Abhishek Bhattacharya" picture={AVATAR_ICON} />
+          <Avatar name="Sayantan Bhattachariya" picture={AVATAR_ICON} />
           <p className="text-xl font-bold leading-relaxed my-4">
             Garbage Disposing:{" "}
           </p>
-          <Avatar name="Sayantan Bhattachariya" picture={AVATAR_ICON} />
+          <Avatar name="Abhishek Bhattacharya" picture={AVATAR_ICON} />
         </div>
       </div>
     </section>
