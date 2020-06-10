@@ -1,12 +1,16 @@
-import Meta from '../components/meta'
+import React from 'react'
+import Meta from './meta'
+import Header from './header'
+import Container from './container'
 
-export default function Layout({ preview, children }) {
+export default function Layout({ children }) {
   return (
     <>
       <Meta />
-      <div className="min-h-screen">
+      <Container>
+        <Header />
         <main>{children}</main>
-      </div>
+      </Container>
     </>
   )
 }
