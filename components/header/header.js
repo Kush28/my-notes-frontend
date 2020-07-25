@@ -1,5 +1,5 @@
 import React from 'react'
-import { User } from 'react-feather'
+import Login from '../login/login'
 
 export default function Header() {
   return (
@@ -10,9 +10,7 @@ export default function Header() {
           ❤️
         </span>
       </h1>
-      <button className="text-center md:text-left text-lg mt-5 md:pl-8">
-        <User />
-      </button>
+      <Login />
     </section>
   )
 }
