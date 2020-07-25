@@ -8,7 +8,7 @@ export default function Index() {
     <>
       <Layout>
         <Head>
-          <title>Rongo House ❤️</title>
+          <title>My Notes</title>
         </Head>
       </Layout>
     </>
