@@ -3,7 +3,8 @@
   "plugins": ["prettier"],
   "parser": "babel-eslint",
   "globals": {
-    "window": true
+    "window": true,
+    "localStorage": true
   },
   "rules": {
     "prettier/prettier": [
@@ -14,6 +15,7 @@
     ],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/prop-types": 0,
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "import/prefer-default-export": "off"
   }
 }

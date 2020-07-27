@@ -2,6 +2,6 @@ require('dotenv').config()
 
 module.exports = {
   env: {
-    GOOGLE_LOGIN_URL: process.env.GOOGLE_LOGIN_URL,
+    SERVER_ENDPOINT: process.env.SERVER_ENDPOINT,
   },
 }

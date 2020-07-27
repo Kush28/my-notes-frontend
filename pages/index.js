@@ -1,16 +1,32 @@
-/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react'
-import Head from 'next/head'
-import Layout from '../components/layout/layout'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
-export default function Index() {
+function Index({ user, auth }) {
   return (
     <>
-      <Layout>
-        <Head>
-          <title>My Notes</title>
-        </Head>
-      </Layout>
+      <p>Hello there !</p>
+      <p>
+        User details:
+        {JSON.stringify(user)}
+      </p>
+      <p>
+        Auth:
+        {JSON.stringify(auth)}
+      </p>
     </>
   )
 }
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+    auth: state.auth,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  addCountAction: bindActionCreators(dispatch),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Index)

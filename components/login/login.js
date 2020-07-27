@@ -1,12 +1,18 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React, { useEffect } from 'react'
 import { User } from 'react-feather'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import Button from '../button/button'
 import { initiateLogin, loginListener } from '../../services/login.service'
+import { authUser } from '../../store/auth/auth.action'
+import { setAuthCookie } from '../../utils/cookie'
 
-export default function Login() {
+function Login({ authUserAction }) {
   const handleLogin = ({ data }) => {
-    console.log(data)
+    if (!data || !data.token) throw new Error('Something went wrong!')
+    setAuthCookie(data.token)
+    authUserAction(data.token)
   }
 
   useEffect(() => {
@@ -22,3 +28,9 @@ export default function Login() {
     </Button>
   )
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  authUserAction: bindActionCreators(authUser, dispatch),
+})
+
+export default connect(null, mapDispatchToProps)(Login)

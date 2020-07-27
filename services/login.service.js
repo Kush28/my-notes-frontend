@@ -1,3 +1,5 @@
+const { googleAuthUrl } = require('../api/authApi')
+
 let loginWindow
 
 const initiateLogin = (provider = 'google') => {
@@ -7,7 +9,7 @@ const initiateLogin = (provider = 'google') => {
     const y = window.top.outerHeight / 2 + window.top.screenY - h / 2
     const x = window.top.outerWidth / 2 + window.top.screenX - w / 2
     loginWindow = window.open(
-      process.env.GOOGLE_LOGIN_URL,
+      googleAuthUrl(),
       'Login with Google',
       `width=${w},height=${h},top=${y}, left=${x}`,
     )
