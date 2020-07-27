@@ -17,7 +17,7 @@ export const getAuthCookie = (key = 'access_token') => {
 }
 
 export const getAuthCookieFromServer = (req, key = 'access_token') => {
-  if (!req.headers.cookie) {
+  if (!req || !req.headers || !req.headers.cookie) {
     return undefined
   }
   const rawCookie = req.headers.cookie.split(';').find((c) => c.trim().startsWith(`${key}=`))
