@@ -14,7 +14,7 @@ export default class MyDocument extends Document {
           <meta name="description" content="Welcome to our world." />
           <meta property="og:image" content="/favicon.png" />
         </Head>
-        <body>
+        <body className="bg-white">
           <Main />
           <NextScript />
         </body>

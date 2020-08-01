@@ -1,13 +1,25 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
+import Link from 'next/link'
+import styles from './button.style'
 
-export default function Button({ children, ...other }) {
+export default function Button({ to, children, variant, className, ...other }) {
+  const consolidatedClass = `${styles[variant]} ${className || ''}`
+  if (!to)
+    return (
+      <button type="button" tabIndex="0" className={consolidatedClass} {...other}>
+        {children}
+      </button>
+    )
   return (
-    <button type="button" tabIndex="0" {...other}>
-      {children}
-    </button>
+    <Link href={to}>
+      <a className={consolidatedClass}>{children}</a>
+    </Link>
   )
 }
 
 Button.defaultProps = {
+  to: null,
   tabIndex: 0,
+  variant: 'primary',
 }

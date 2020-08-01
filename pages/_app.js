@@ -1,15 +1,21 @@
 import React from 'react'
 import '../styles/index.css'
 import { wrapper } from '../store/store'
-import Layout from '../components/layout/layout'
 import { getAuthCookieFromServer } from '../utils/cookie'
 import { authUser } from '../store/auth/auth.action'
+import Meta from '../components/meta/meta'
+// import Container from '../components/container/container'
+// import Header from '../components/header/header'
 
 function App({ Component, pageProps }) {
   return (
-    <Layout>
+    <>
+      <Meta />
+      {/* <Container> */}
+      {/* <Header /> */}
       <Component {...pageProps} />
-    </Layout>
+      {/* </Container> */}
+    </>
   )
 }
 
