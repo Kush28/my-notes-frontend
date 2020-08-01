@@ -14,9 +14,6 @@ function AddNewNote() {
       <div className="flex flex-col mt-4">
         <TakeNote />
       </div>
-      <div className="w-full text-center mt-5">
-        <Button variant="primary">Save</Button>
-      </div>
     </Container>
   )
 }

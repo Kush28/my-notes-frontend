@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown/with-html'
 import Badge from '../badge/badge'
 import Button from '../button/button'
 
-function Note({ title, body, badges }) {
+function Note({ title, body, tags }) {
   const [pinned, setPinned] = useState(false)
   return (
     <div className="rounded border border-1 border-graylight p-3 my-2">
@@ -23,11 +23,9 @@ function Note({ title, body, badges }) {
         <ReactMarkdown source={body} />
       </div>
       <div className="scrollbar-hidden flex scrolling-touch whitespace-no-wrap overflow-x-auto">
-        <Badge text="badge1" />
-        <Badge text="badge2" />
-        <Badge text="badge3" />
-        <Badge text="badge4" />
-        <Badge text="badge5" />
+        {tags.map((tag) => (
+          <Badge key={tag} text={tag} />
+        ))}
       </div>
     </div>
   )

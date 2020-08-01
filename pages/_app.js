@@ -15,8 +15,13 @@ function App({ Component, pageProps }) {
 }
 
 App.getInitialProps = async ({ ctx }) => {
-  const accessToken = getAuthCookieFromServer(ctx.req)
+  const { req, res } = ctx
+  const accessToken = getAuthCookieFromServer(req)
   if (accessToken) await ctx.store.dispatch(authUser(accessToken))
+  const { auth } = ctx.store.getState()
+  if (!auth.authenticated && req.url !== '/') {
+    res.writeHead(302, { Location: '/' }).end()
+  }
 }
 
 export default wrapper.withRedux(App)
