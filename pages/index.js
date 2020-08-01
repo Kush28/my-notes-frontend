@@ -5,7 +5,10 @@ import { bindActionCreators } from 'redux'
 function Index({ user, auth }) {
   return (
     <>
-      <p>Hello there !</p>
+      <p>
+        Welcome:
+        {user.name}
+      </p>
       <p>
         User details:
         {JSON.stringify(user)}

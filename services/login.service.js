@@ -16,7 +16,7 @@ const initiateLogin = (provider = 'google') => {
   }
 }
 
-const loginListener = (callback) => {
+const attachLoginListener = (callback) => {
   window.addEventListener('message', (data) => {
     callback(data)
     setTimeout(() => {
@@ -25,4 +25,4 @@ const loginListener = (callback) => {
   })
 }
 
-module.exports = { initiateLogin, loginListener }
+module.exports = { initiateLogin, attachLoginListener }

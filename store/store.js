@@ -20,7 +20,6 @@ const combinedReducer = combineReducers({
 
 const reducer = (state, action) => {
   if (action.type === HYDRATE) {
-    console.log(action)
     return { ...state, ...action.payload }
   }
   return combinedReducer(state, action)
