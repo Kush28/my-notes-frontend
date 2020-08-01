@@ -1,5 +1,6 @@
 export default {
   simple: '',
+  transparent: 'rounded-10 hover:bg-graylight',
   default:
     'font-bold py-2 px-4 rounded-10 bg-transparent text-default border-solid border-4 border-default hover:bg-default hover:text-white',
   primary:

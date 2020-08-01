@@ -9,6 +9,7 @@ module.exports = {
         warning: '#FFD400',
         error: '#E07A5F',
         gray: '#898989',
+        graylight: '#ededed',
       },
       spacing: {},
       letterSpacing: {},
@@ -18,8 +19,8 @@ module.exports = {
         10: '10rem',
       },
       boxShadow: {
-        small: '0 5px 10px rgba(0, 0, 0, 0.12)',
-        medium: '0 8px 30px rgba(0, 0, 0, 0.12)',
+        small: '0 2px 5px rgba(0, 0, 0, 0.18)',
+        medium: '0 3px 5px rgba(0,0,0,0.20)',
       },
     },
   },

@@ -21,5 +21,5 @@ export default function Button({ to, children, variant, className, ...other }) {
 Button.defaultProps = {
   to: null,
   tabIndex: 0,
-  variant: 'primary',
+  variant: 'simple',
 }

@@ -13,18 +13,21 @@ function Index({ auth, user }) {
           <h1 className="text-4xl font-extrabold text-warning mr-2">mynotes</h1>
           <RiStickyNoteLine className="text-2xl text-primary" />
         </div>
-        <h2 className="text-gray">A brilliant way to keep yourself organized</h2>
+        <h2 className="">A brilliant way to keep yourself organized</h2>
       </div>
 
       <div className="flex-row flex">
         {!auth.authenticated && <LoginButton />}
         {auth.authenticated && (
-          <div className="flex-col flex items-center text-lg text-gray">
-            <p className="mb-5">Welcome back!</p>
-            <Button to="/notes" variant="simple">
-              <Avatar image={user.avatar} className="mb-2" />
+          <div className="flex-col flex items-center text-lg text-center">
+            <p className="mb-5">Welcome back</p>
+            <Button to="/notes" variant="simple" className="mb-5">
+              <Avatar image={user.avatar} className="mb-3" />
+              <p className="text-sm">{user.name}</p>
             </Button>
-            <p className="text-sm">Not you?</p>
+            <Button variant="simple" className="text-xs text-gray">
+              Not you?
+            </Button>
           </div>
         )}
       </div>

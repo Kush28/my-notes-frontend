@@ -4,17 +4,12 @@ import { wrapper } from '../store/store'
 import { getAuthCookieFromServer } from '../utils/cookie'
 import { authUser } from '../store/auth/auth.action'
 import Meta from '../components/meta/meta'
-// import Container from '../components/container/container'
-// import Header from '../components/header/header'
 
 function App({ Component, pageProps }) {
   return (
     <>
       <Meta />
-      {/* <Container> */}
-      {/* <Header /> */}
       <Component {...pageProps} />
-      {/* </Container> */}
     </>
   )
 }
