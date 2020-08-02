@@ -12,3 +12,7 @@ export const authUser = (token) => async (dispatch) => {
     dispatch({ type: actionTypes.AUTH_FAILED, payload: error.response })
   }
 }
+
+export const authError = (error) => (dispatch) => {
+  dispatch({ type: actionTypes.AUTH_FAILED, payload: error.response })
+}

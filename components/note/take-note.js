@@ -1,14 +1,22 @@
 import React, { useState } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import Badge from '../badge/badge'
 import Button from '../button/button'
 import { createNote } from '../../api/notesApi'
 import { getAuthCookie } from '../../utils/cookie'
+import { authError } from '../../store/auth/auth.action'
+import Modal from '../modal/modal'
+import { useRouter } from 'next/router'
 
-function TakeNote() {
+function TakeNote({ setAuthError }) {
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
   const [tagInput, setTagInput] = useState('')
   const [tags, setTags] = useState([])
+
+  const [saveSuccess, setSaveSuccess] = useState(false)
+  const router = useRouter()
 
   const addNewTag = (e) => {
     if (e.key === 'Enter') {
@@ -22,16 +30,28 @@ function TakeNote() {
     setTags(tags.filter((tag) => tag !== tagToRemove))
   }
 
-  const saveFormData = () => {
+  const saveFormData = async () => {
     const noteData = {
       title,
       body,
       tags,
     }
-    createNote(getAuthCookie(), noteData).then((res) => console.log(res))
+    try {
+      await createNote(getAuthCookie(), noteData)
+      setSaveSuccess(true)
+    } catch (error) {
+      setAuthError(error)
+    }
   }
+
   return (
     <>
+      {saveSuccess && (
+        <Modal closeHandler={()=> router.push('/notes')}>
+          <p className="text-xl">Great!</p>
+          <p>Your note have been saved.</p>
+        </Modal>
+      )}
       <div className="rounded shadow-medium border border-1 border-graylight p-3 my-2">
         <input
           className="focus:outline-none w-full text-3xl mb-4"
@@ -67,4 +87,8 @@ function TakeNote() {
   )
 }
 
-export default TakeNote
+const mapDispatchToProps = (dispatch) => ({
+  setAuthError: bindActionCreators(authError, dispatch),
+})
+
+export default connect(null, mapDispatchToProps)(TakeNote)
