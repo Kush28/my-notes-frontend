@@ -16,10 +16,15 @@ function App({ Component, pageProps }) {
 
 App.getInitialProps = async ({ ctx }) => {
   const { req, res } = ctx
-  const accessToken = getAuthCookieFromServer(req)
-  if (accessToken) await ctx.store.dispatch(authUser(accessToken))
-  const { auth } = ctx.store.getState()
-  if (!auth.authenticated && req.url !== '/') {
+
+  try {
+    const accessToken = getAuthCookieFromServer(req)
+    if (accessToken) await ctx.store.dispatch(authUser(accessToken))
+    const { auth } = ctx.store.getState()
+    if (!auth.authenticated && req.url !== '/') {
+      res.writeHead(302, { Location: '/' }).end()
+    }
+  } catch (error) {
     res.writeHead(302, { Location: '/' }).end()
   }
 }

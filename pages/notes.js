@@ -9,14 +9,21 @@ import { getFormattedDate } from '../utils/dateParser'
 
 function Notes({ notesData }) {
   const consolidatedNotes = {}
-  notesData.forEach((note) => {
-    const createdDate = new Date(note.createdAt)
-    consolidatedNotes[getFormattedDate(createdDate)] = consolidatedNotes[
-      getFormattedDate(createdDate)
-    ]
-      ? [...consolidatedNotes[getFormattedDate(createdDate)], note]
-      : [note]
-  })
+  notesData
+    .sort((note1, note2) => {
+      const date1 = new Date(note1.createdAt)
+      const date2 = new Date(note2.createdAt)
+      return date2 - date1
+    })
+    .forEach((note) => {
+      const createdDate = new Date(note.createdAt)
+      consolidatedNotes[getFormattedDate(createdDate)] = consolidatedNotes[
+        getFormattedDate(createdDate)
+      ]
+        ? [note, ...consolidatedNotes[getFormattedDate(createdDate)]]
+        : [note]
+    })
+
   return (
     <Container>
       <div className="flex flex-col mb-5">
@@ -53,9 +60,14 @@ function Notes({ notesData }) {
 
 export async function getServerSideProps({ req }) {
   const accessToken = getAuthCookieFromServer(req)
-  const { data } = await fetchAllNotes(accessToken)
+  if (accessToken) {
+    const { data } = await fetchAllNotes(accessToken)
+    return {
+      props: { notesData: data || [] },
+    }
+  }
   return {
-    props: { notesData: data || [] },
+    props: { notesData: [] },
   }
 }
 
