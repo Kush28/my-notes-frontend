@@ -7,10 +7,10 @@ import Button from '../components/button/button'
 
 function Index({ auth, user }) {
   return (
-    <div className="flex-col flex fixed h-full w-full top-0 bottom-0 justify-center items-center bg-white">
+    <div className="flex-col flex fixed h-full w-full top-0 bottom-0 justify-center items-center">
       <div className="flex-col flex mb-40">
         <div className="flex-row flex">
-          <h1 className="text-4xl font-extrabold text-warning mr-2">mynotes</h1>
+          <h1 className="text-4xl font-extrabold text-warning mr-2 font-ariel">mynotes</h1>
           <RiStickyNoteLine className="text-2xl text-primary" />
         </div>
         <h2 className="">A brilliant way to keep yourself organized</h2>

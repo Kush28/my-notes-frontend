@@ -13,6 +13,7 @@ export default class MyDocument extends Document {
           <meta name="theme-color" content="#000" />
           <meta name="description" content="Welcome to our world." />
           <meta property="og:image" content="/favicon.png" />
+          <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
         </Head>
         <body className="bg-white">
           <Main />

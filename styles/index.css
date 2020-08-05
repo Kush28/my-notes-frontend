@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+}
+
 .scrollbar-hidden::-webkit-scrollbar {
   display: none;
   scrollbar-width: none;

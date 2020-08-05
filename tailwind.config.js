@@ -22,6 +22,9 @@ module.exports = {
         small: '0 2px 5px rgba(0, 0, 0, 0.18)',
         medium: '0 3px 5px rgba(0,0,0,0.20)',
       },
+      fontFamily: {
+        ariel: 'Arial, Helvetica, sans-serif',
+      },
     },
   },
 }
