@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start",
+    "start": "set NODE_ENV=production && node server.js",
     "export": "next build && next export",
     "lint": "eslint */**.js --fix"
   },
