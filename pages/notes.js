@@ -27,6 +27,7 @@ function Notes({ notesData }) {
   return (
     <Container>
       <div className="flex flex-col mb-5">
+        <Button to="/">Home</Button>
         <h1 className="font-bold mb-3">Add a new note</h1>
         <Button
           to="/notes/addnew"

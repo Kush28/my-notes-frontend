@@ -1,4 +1,5 @@
 import React from 'react'
+import { AnimatePresence } from 'framer-motion'
 import '../styles/index.css'
 import { wrapper } from '../store/store'
 import { getAuthCookieFromServer } from '../utils/cookie'
@@ -9,7 +10,9 @@ function App({ Component, pageProps }) {
   return (
     <>
       <Meta />
-      <Component {...pageProps} />
+      <AnimatePresence exitBeforeEnter>
+        <Component {...pageProps} />
+      </AnimatePresence>
     </>
   )
 }
