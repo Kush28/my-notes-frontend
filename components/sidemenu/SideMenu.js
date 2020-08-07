@@ -43,10 +43,14 @@ const SideMenu = () => {
 
   return (
     <motion.div initial={false} animate={isOpen ? 'open' : 'closed'}>
-      <nav className={`absolute top-0 left-0 bottom-0 w-300 ${!showMenu && 'hidden'}`}>
+      <nav
+        className={`absolute top-0 left-0 bottom-0 w-300 text-white font-bold ${
+          !showMenu && 'hidden'
+        }`}
+      >
         <motion.div
           className="absolute top-0 left-0 bottom-0 w-full"
-          style={{ background: 'linear-gradient(180deg, #0055ff 0%, rgb(0, 153, 255) 100%)' }}
+          style={{ background: 'linear-gradient(180deg, #0055ff 0%, rgb(153, 204, 238) 100%)' }}
           variants={sidebar}
         />
         <Navigation />

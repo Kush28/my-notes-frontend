@@ -19,7 +19,7 @@ const Navigation = ({ user }) => (
     <MenuItem>
       <Button className="flex items-center px-10 w-full">
         <Avatar size="Smaller" image={user.avatar} />
-        <span className="ml-5">{user.name}</span>
+        <p className="ml-5 font-bold">{user.name}</p>
       </Button>
     </MenuItem>
     <MenuItem>
