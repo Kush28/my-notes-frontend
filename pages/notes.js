@@ -1,28 +1,17 @@
 /* eslint-disable no-underscore-dangle */
-import React from 'react'
+import React, { useEffect } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import Container from '../components/container/container'
 import Button from '../components/button/button'
 import Note from '../components/note/note'
-import { fetchAllNotes } from '../api/notesApi'
-import { getAuthCookieFromServer } from '../utils/cookie'
-import { getFormattedDate } from '../utils/dateParser'
+import { getAuthCookie } from '../utils/cookie'
+import { fetchAllNotesAction } from '../store/notes/notes.action'
 
-function Notes({ notesData }) {
-  const consolidatedNotes = {}
-  notesData
-    .sort((note1, note2) => {
-      const date1 = new Date(note1.createdAt)
-      const date2 = new Date(note2.createdAt)
-      return date2 - date1
-    })
-    .forEach((note) => {
-      const createdDate = new Date(note.createdAt)
-      consolidatedNotes[getFormattedDate(createdDate)] = consolidatedNotes[
-        getFormattedDate(createdDate)
-      ]
-        ? [note, ...consolidatedNotes[getFormattedDate(createdDate)]]
-        : [note]
-    })
+function Notes({ notes, fetchNotes }) {
+  useEffect(() => {
+    fetchNotes(getAuthCookie())
+  }, [])
 
   return (
     <Container>
@@ -40,10 +29,10 @@ function Notes({ notesData }) {
 
       <div className="flex flex-col">
         <h2 className="font-bold">Saved notes</h2>
-        {Object.keys(consolidatedNotes).map((key) => (
+        {Object.keys(notes).map((key) => (
           <React.Fragment key={key}>
             <h3 className="text-xs text-gray text-right py-2">{key}</h3>
-            {consolidatedNotes[key].map((note) => (
+            {notes[key].map((note) => (
               <Note
                 key={note._id}
                 id={note._id}
@@ -59,17 +48,12 @@ function Notes({ notesData }) {
   )
 }
 
-export async function getServerSideProps({ req }) {
-  const accessToken = getAuthCookieFromServer(req)
-  if (accessToken) {
-    const { data } = await fetchAllNotes(accessToken)
-    return {
-      props: { notesData: data || [] },
-    }
-  }
-  return {
-    props: { notesData: [] },
-  }
-}
+const mapStateToProps = ({ notes }) => ({
+  notes,
+})
 
-export default Notes
+const mapDispatchToProps = (dispatch) => ({
+  fetchNotes: bindActionCreators(fetchAllNotesAction, dispatch),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Notes)

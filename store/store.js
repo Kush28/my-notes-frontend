@@ -3,19 +3,16 @@ import { HYDRATE, createWrapper } from 'next-redux-wrapper'
 import thunkMiddleware from 'redux-thunk'
 import user from './user/user.reducer'
 import auth from './auth/auth.reducer'
+import notes from './notes/notes.reducer'
 
 const bindMiddleware = (middleware) => {
-  if (process.env.NODE_ENV !== 'production') {
-    // eslint-disable-next-line global-require
-    const { composeWithDevTools } = require('redux-devtools-extension')
-    return composeWithDevTools(applyMiddleware(...middleware))
-  }
   return applyMiddleware(...middleware)
 }
 
 const combinedReducer = combineReducers({
   user,
   auth,
+  notes,
 })
 
 const reducer = (state, action) => {
