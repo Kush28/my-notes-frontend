@@ -10,9 +10,9 @@ function App({ Component, pageProps }) {
   return (
     <>
       <Meta />
-      <AnimatePresence exitBeforeEnter>
+      {/* <AnimatePresence exitBeforeEnter> */}
         <Component {...pageProps} />
-      </AnimatePresence>
+      {/* </AnimatePresence> */}
     </>
   )
 }

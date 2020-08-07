@@ -7,6 +7,7 @@ import Button from '../components/button/button'
 import Note from '../components/note/note'
 import { getAuthCookie } from '../utils/cookie'
 import { fetchAllNotesAction } from '../store/notes/notes.action'
+import SideMenu from '../components/sidemenu/SideMenu'
 
 function Notes({ notes, fetchNotes }) {
   useEffect(() => {
@@ -15,8 +16,8 @@ function Notes({ notes, fetchNotes }) {
 
   return (
     <Container>
-      <div className="flex flex-col mb-5">
-        <Button to="/">Home</Button>
+      <SideMenu />
+      <div className="flex flex-col mb-5 mt-10">
         <h1 className="font-bold mb-3">Add a new note</h1>
         <Button
           to="/notes/addnew"
@@ -27,7 +28,7 @@ function Notes({ notes, fetchNotes }) {
         </Button>
       </div>
 
-      <div className="flex flex-col">
+      <div className="flex flex-col mt-5">
         <h2 className="font-bold">Saved notes</h2>
         {Object.keys(notes).map((key) => (
           <React.Fragment key={key}>

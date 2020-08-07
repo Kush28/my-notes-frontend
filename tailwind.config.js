@@ -11,10 +11,13 @@ module.exports = {
         gray: '#898989',
         graylight: '#ededed',
       },
-      spacing: {},
-      letterSpacing: {},
-      lineHeight: {},
-      fontSize: {},
+      width: {
+        300: '300px',
+      },
+      inset: {
+        15: '15px',
+        18: '18px',
+      },
       borderRadius: {
         10: '10rem',
       },

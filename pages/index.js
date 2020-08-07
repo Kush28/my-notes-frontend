@@ -61,7 +61,9 @@ function Index({ auth, user }) {
             <div className="flex-col flex items-center text-lg text-center">
               <p className="mb-5">Welcome back</p>
               <Button to="/notes" variant="simple" className="mb-5">
-                <Avatar image={user.avatar} className="mb-3" />
+                <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                  <Avatar image={user.avatar} className="mb-3" />
+                </motion.div>
                 <p className="text-sm">{user.name}</p>
               </Button>
               <Button variant="simple" className="text-xs text-gray">
