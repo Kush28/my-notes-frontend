@@ -34,15 +34,21 @@ stages:
     steps:
 
     - task: Npm@1
-      displayName: 'npm install'
+      displayName: 'Install Packages'
       inputs:
         command: 'install'
     
     - task: Npm@1
-      displayName: 'npm build'
+      displayName: 'Build'
       inputs:
         command: 'custom'
         customCommand: 'run build'
+
+    - task: Npm@1
+      displayName: 'Remove Unused Packages'
+      inputs:
+        command: 'custom'
+        customCommand: 'prune --production'
       
     - task: ArchiveFiles@2
       displayName: 'Archive files'
