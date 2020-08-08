@@ -22,7 +22,7 @@ function LoginButton({ authUserAction }) {
     <Button
       className="flex-row flex justify-between text-sm p-5 items-center"
       onClick={() => initiateLogin()}
-      variant="primary"
+      variant="login"
     >
       <AiFillGoogleCircle className="text-3xl" />
       <span className="pl-5">Continue with Google</span>

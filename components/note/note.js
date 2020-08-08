@@ -7,20 +7,25 @@ import { deleteNote } from '../../api/notesApi'
 import Modal from '../modal/modal'
 import { getAuthCookie } from '../../utils/cookie'
 import { getFormattedDate } from '../../utils/dateParser'
+import Loading from '../loading/loading'
 
-function Note({ id, title, body, tags, createdAt }) {
+function Note({ id, title, body, tags, createdAt, postDelete }) {
   const [pinned, setPinned] = useState(false)
   const [deletePrompt, setDeletePrompt] = useState(false)
+  const [isDeleting, setDeleting] = useState(false)
 
   async function deleteHandler() {
+    setDeleting(true)
     await deleteNote(getAuthCookie(), id)
+    setDeleting(false)
     setDeletePrompt(false)
+    postDelete()
   }
   return (
     <>
       {deletePrompt && (
         <Modal
-          primaryButton="Yes"
+          primaryButton={isDeleting ? <Loading color="white" /> : 'Yes'}
           secondaryButton="No"
           okHandler={deleteHandler}
           closeHandler={() => setDeletePrompt(false)}

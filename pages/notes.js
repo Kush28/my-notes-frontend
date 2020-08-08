@@ -11,13 +11,42 @@ import { fetchAllNotesAction } from '../store/notes/notes.action'
 import Layout from '../components/layout/layout'
 import { getFormattedDate } from '../utils/dateParser'
 import Avatar from '../components/avatar/avatar'
+import Loading from '../components/loading/loading'
 
 function Notes({ user, notes, fetchNotes }) {
   const [date, setDate] = useState(null)
+
   useEffect(() => {
     setDate(new Date())
     fetchNotes(getAuthCookie())
   }, [])
+
+  const { isFetching, fetched, data } = notes
+
+  const renderNotes = () =>
+    data.length === 0 ? (
+      <div className="flex h-64 text-center items-center px-10">
+        <p>
+          <span>Click on the</span>
+          <span className="font-bold"> + </span>
+          <span>icon to add your first note</span>
+        </p>
+      </div>
+    ) : (
+      data.map((note) => (
+        <Note
+          key={note._id}
+          id={note._id}
+          title={note.title}
+          body={note.body}
+          tags={note.tags}
+          createdAt={note.createdAt}
+          postDelete={() => {
+            fetchNotes(getAuthCookie())
+          }}
+        />
+      ))
+    )
 
   return (
     <Layout>
@@ -33,27 +62,17 @@ function Notes({ user, notes, fetchNotes }) {
         </div>
         <hr className="my-4" />
         <div className="flex flex-col mt-5">
-          {notes.length === 0 ? (
-            <div className="flex h-64 text-center items-center px-10">
-              <p>Click on the + icon to add your fisrt note</p>
+          {isFetching && !fetched && (
+            <div className="flex h-64 text-center justify-center items-center px-16">
+              <Loading />
             </div>
-          ) : (
-            notes.map((note) => (
-              <Note
-                key={note._id}
-                id={note._id}
-                title={note.title}
-                body={note.body}
-                tags={note.tags}
-                createdAt={note.createdAt}
-              />
-            ))
           )}
+          {!isFetching && fetched && renderNotes()}
         </div>
         <Button
           to="/notes/addnew"
           variant="simple"
-          className="fixed shadow-large rounded-full bg-primary text-2xl p-4 bottom-0 right-0 mr-8 mb-10"
+          className="fixed shadow-large rounded-full bg-primary text-2xl p-4 bottom-0 right-0 mr-8 mb-10 text-white"
         >
           <FiPlus />
         </Button>

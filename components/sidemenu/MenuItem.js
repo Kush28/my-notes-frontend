@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { motion } from 'framer-motion'
+import Button from '../button/button'
 
 const variants = {
   open: {
@@ -18,7 +19,7 @@ const variants = {
   },
 }
 
-export const MenuItem = ({ children }) => {
+export const MenuItem = ({ to, icon, text }) => {
   return (
     <motion.li
       className="flex items-center mb-5 w-full"
@@ -26,7 +27,10 @@ export const MenuItem = ({ children }) => {
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
     >
-      {children}
+      <Button to={to} className="flex items-center px-10 w-full">
+        {icon}
+        <p className="ml-5 font-bold">{text}</p>
+      </Button>
     </motion.li>
   )
 }

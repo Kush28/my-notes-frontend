@@ -17,11 +17,11 @@ function Modal({ children, okHandler, closeHandler, primaryButton, secondaryButt
         <div className="py-5 font-semibold text-center">{children}</div>
         <div className="flex flex-row justify-center items-center">
           {primaryButton && (
-            <Button variant="primary-fill" className="mr-10" onClick={okHandler}>
+            <Button variant="primary-block" className="h-12 mr-8" onClick={okHandler}>
               {primaryButton}
             </Button>
           )}
-          <Button variant="warning" onClick={closeHandler}>
+          <Button variant="transparent" className="h-12" onClick={closeHandler}>
             {secondaryButton || 'OK'}
           </Button>
         </div>

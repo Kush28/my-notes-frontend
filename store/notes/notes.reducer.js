@@ -1,6 +1,10 @@
 import actionTypes from '../types'
 
-const initialUserState = []
+const initialUserState = {
+  isFetching: false,
+  fetched: false,
+  data: [],
+}
 
 const getSortedNotes = (data) =>
   data.sort((note1, note2) => {
@@ -11,10 +15,17 @@ const getSortedNotes = (data) =>
 
 export default function reducer(state = initialUserState, action) {
   switch (action.type) {
-    case actionTypes.NOTE_SET_DATA: {
+    case actionTypes.NOTE_START_FETCH: {
+      return { ...state, isFetching: true, fetched: false }
+    }
+    case actionTypes.NOTE_END_FETCH: {
       const { payload } = action
       const sortedData = getSortedNotes(payload)
-      return sortedData
+      return {
+        isFetching: false,
+        fetched: true,
+        data: sortedData,
+      }
     }
     default:
       return state

@@ -13,3 +13,7 @@ body {
 .scrollbar-hidden {
   scrollbar-width: none;
 }
+
+button:focus {
+  outline: 0;
+}

@@ -6,30 +6,8 @@ import LoginButton from '../components/login-button/login-button'
 import Avatar from '../components/avatar/avatar'
 import Button from '../components/button/button'
 import Container from '../components/container/container'
+import { stagger, fadeInUp } from '../animations/fadeInUp'
 
-function FadeInUp({ children, ...other }) {
-  const easing = [0.6, -0.05, 0.01, 0.99]
-  return (
-    <motion.div
-      initial={{
-        y: 60,
-        opacity: 0,
-        transition: { duration: 0.6, ease: easing },
-      }}
-      animate={{
-        y: 0,
-        opacity: 1,
-        transition: {
-          duration: 0.6,
-          ease: easing,
-        },
-      }}
-      {...other}
-    >
-      {children}
-    </motion.div>
-  )
-}
 
 function Index({ auth, user }) {
   const [welcomeText, setWelcomeText] = useState('')
@@ -74,23 +52,38 @@ function Index({ auth, user }) {
           </motion.h2>
         </motion.div>
 
-        <FadeInUp className="flex-row flex">
+        <motion.div
+          initial="initial"
+          animate="animate"
+          variants={stagger}
+          className="flex-row flex"
+        >
           {!auth.authenticated && <LoginButton />}
           {auth.authenticated && (
             <div className="flex-col flex items-center text-lg text-center">
-              <p className="mb-5">{welcomeText}</p>
+              <motion.p variants={fadeInUp} className="mb-5">
+                {welcomeText}
+              </motion.p>
               <Button to="/notes" variant="simple" className="mb-5">
-                <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                <motion.div
+                  variants={fadeInUp}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
                   <Avatar image={user.avatar} className="mb-3" />
                 </motion.div>
-                <p className="text-sm">{user.name}</p>
+                <motion.p variants={fadeInUp} className="text-sm">
+                  {user.name}
+                </motion.p>
               </Button>
-              <Button variant="simple" className="text-xs text-gray">
-                Not you?
+              <Button variant="simple">
+                <motion.p variants={fadeInUp} className="text-xs text-gray">
+                  Not you?
+                </motion.p>
               </Button>
             </div>
           )}
-        </FadeInUp>
+        </motion.div>
       </div>
     </Container>
   )

@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { motion } from 'framer-motion'
 import { connect } from 'react-redux'
+import { RiHome2Line, RiMenuAddLine, RiStickyNoteLine } from 'react-icons/ri'
 import { MenuItem } from './MenuItem'
 import Avatar from '../avatar/avatar'
-import Button from '../button/button'
 
 const variants = {
   open: {
@@ -16,27 +16,10 @@ const variants = {
 
 const Navigation = ({ user }) => (
   <motion.ul className="absolute p-25 mt-20 w-full" variants={variants}>
-    <MenuItem>
-      <Button className="flex items-center px-10 w-full">
-        <Avatar size="Smaller" image={user.avatar} />
-        <p className="ml-5 font-bold">{user.name}</p>
-      </Button>
-    </MenuItem>
-    <MenuItem>
-      <Button to="/" className="flex items-center px-10 w-full">
-        Home
-      </Button>
-    </MenuItem>
-    <MenuItem>
-      <Button to="/notes" className="flex items-center px-10 w-full">
-        My Notes
-      </Button>
-    </MenuItem>
-    <MenuItem>
-      <Button to="/notes/addnew" className="flex items-center px-10 w-full">
-        Add a Note
-      </Button>
-    </MenuItem>
+    <MenuItem icon={<Avatar size="Smaller" image={user.avatar} />} text={user.name} />
+    <MenuItem to="/" icon={<RiHome2Line />} text="Home" />
+    <MenuItem to="/" icon={<RiStickyNoteLine />} text="My Notes" />
+    <MenuItem to="/" icon={<RiMenuAddLine />} text="Add a Note" />
   </motion.ul>
 )
 
