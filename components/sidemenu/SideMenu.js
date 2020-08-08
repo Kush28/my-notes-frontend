@@ -42,9 +42,9 @@ const SideMenu = () => {
   }
 
   return (
-    <motion.div initial={false} animate={isOpen ? 'open' : 'closed'}>
-      <nav
-        className={`absolute top-0 left-0 bottom-0 w-300 text-white font-bold ${
+    <motion.nav initial={false} animate={isOpen ? 'open' : 'closed'}>
+      <div
+        className={`absolute top-0 left-0 bottom-0 w-300 z-99 text-white font-bold ${
           !showMenu && 'hidden'
         }`}
       >
@@ -54,9 +54,9 @@ const SideMenu = () => {
           variants={sidebar}
         />
         <Navigation />
-      </nav>
+      </div>
       <MenuToggle isOpen={isOpen} toggle={() => toggleOpen()} />
-    </motion.div>
+    </motion.nav>
   )
 }
 

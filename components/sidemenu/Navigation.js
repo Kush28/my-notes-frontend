@@ -28,6 +28,11 @@ const Navigation = ({ user }) => (
       </Button>
     </MenuItem>
     <MenuItem>
+      <Button to="/notes" className="flex items-center px-10 w-full">
+        My Notes
+      </Button>
+    </MenuItem>
+    <MenuItem>
       <Button to="/notes/addnew" className="flex items-center px-10 w-full">
         Add a Note
       </Button>

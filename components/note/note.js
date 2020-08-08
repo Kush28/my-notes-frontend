@@ -6,8 +6,9 @@ import Button from '../button/button'
 import { deleteNote } from '../../api/notesApi'
 import Modal from '../modal/modal'
 import { getAuthCookie } from '../../utils/cookie'
+import { getFormattedDate } from '../../utils/dateParser'
 
-function Note({ id, title, body, tags }) {
+function Note({ id, title, body, tags, createdAt }) {
   const [pinned, setPinned] = useState(false)
   const [deletePrompt, setDeletePrompt] = useState(false)
 
@@ -27,10 +28,10 @@ function Note({ id, title, body, tags }) {
           <p>Are you sure?</p>
         </Modal>
       )}
-      <div className="rounded border border-1 border-graylight p-3 my-2">
+      <div className="rounded p-3 my-2 shadow-small">
         <div className="flex flex-row justify-between">
-          <h3 className="font-medium pb-2">{title}</h3>
-          <div className="ml-1">
+          <h3 className="font-medium pb-2 w-8/12">{title}</h3>
+          <div className="ml-1 w-4/12 text-right">
             <Button variant="transparent" className="p-2" onClick={() => setPinned(!pinned)}>
               {pinned ? <RiPushpinLine /> : <RiPushpin2Line />}
             </Button>
@@ -42,10 +43,15 @@ function Note({ id, title, body, tags }) {
         <div className="text-sm pb-3">
           <ReactMarkdown source={body} />
         </div>
-        <div className="scrollbar-hidden flex scrolling-touch whitespace-no-wrap overflow-x-auto">
-          {tags.map((tag) => (
-            <Badge key={tag} text={tag} />
-          ))}
+        <div className="flex flex-row">
+          <div className="w-9/12 rounded-full scrollbar-hidden flex scrolling-touch whitespace-no-wrap overflow-x-auto">
+            {tags.map((tag) => (
+              <Badge key={tag} text={tag} />
+            ))}
+          </div>
+          <div className="w-3/12 text-xs text-right px-3 py-1 text-gray">
+            {getFormattedDate(new Date(createdAt))}
+          </div>
         </div>
       </div>
     </>

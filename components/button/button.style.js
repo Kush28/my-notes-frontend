@@ -1,6 +1,6 @@
 export default {
   simple: '',
-  transparent: 'transition duration-200 ease-in-out rounded-10 hover:bg-graylight',
+  transparent: 'transition duration-200 py-2 px-4 ease-in-out rounded-10 hover:bg-graylight',
   default:
     'transition duration-200 ease-in-out font-bold py-2 px-4 rounded-10 bg-transparent text-default border-solid border-4 border-default hover:bg-default hover:text-white',
   primary:

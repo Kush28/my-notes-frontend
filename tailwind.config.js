@@ -24,6 +24,7 @@ module.exports = {
       boxShadow: {
         small: '0 2px 5px rgba(0, 0, 0, 0.18)',
         medium: '0 3px 5px rgba(0,0,0,0.20)',
+        large: '0 6px 10px rgba(0,0,0,0.40)'
       },
       fontFamily: {
         ariel: 'Arial, Helvetica, sans-serif',

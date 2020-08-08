@@ -4,7 +4,8 @@
   "parser": "babel-eslint",
   "globals": {
     "window": true,
-    "localStorage": true
+    "localStorage": true,
+    "sessionStorage": true
   },
   "rules": {
     "prettier/prettier": [

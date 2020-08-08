@@ -1,5 +1,4 @@
 import React from 'react'
-import { AnimatePresence } from 'framer-motion'
 import '../styles/index.css'
 import { wrapper } from '../store/store'
 import { getAuthCookieFromServer } from '../utils/cookie'
@@ -10,9 +9,7 @@ function App({ Component, pageProps }) {
   return (
     <>
       <Meta />
-      {/* <AnimatePresence exitBeforeEnter> */}
-        <Component {...pageProps} />
-      {/* </AnimatePresence> */}
+      <Component {...pageProps} />
     </>
   )
 }
@@ -28,7 +25,9 @@ App.getInitialProps = async ({ ctx }) => {
       res.writeHead(302, { Location: '/' }).end()
     }
   } catch (error) {
-    res.writeHead(302, { Location: '/' }).end()
+    // eslint-disable-next-line no-console
+    console.error(error)
+    if (res) res.writeHead(302, { Location: '/' }).end()
   }
 }
 

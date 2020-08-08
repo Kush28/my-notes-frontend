@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { RiStickyNoteLine } from 'react-icons/ri'
 import { motion } from 'framer-motion'
@@ -32,6 +32,25 @@ function FadeInUp({ children, ...other }) {
 }
 
 function Index({ auth, user }) {
+  const [welcomeText, setWelcomeText] = useState('')
+
+  useEffect(() => {
+    if (auth.authenticated) {
+      const inSession = !!sessionStorage.getItem('session')
+      const firstVisit = !!localStorage.getItem('fistVisit')
+      if (firstVisit) {
+        setWelcomeText('Welcome')
+        localStorage.setItem('firstVisit', '')
+      } else if (inSession) {
+        setWelcomeText('')
+      } else {
+        setWelcomeText('Welcome back')
+        sessionStorage.setItem('session', 'true')
+        localStorage.setItem('firstVisit', 'true')
+      }
+    }
+  }, [])
+
   return (
     <Container>
       <div className="flex-col flex fixed h-full w-full top-0 bottom-0 left-0 right-0 justify-center items-center">
@@ -59,7 +78,7 @@ function Index({ auth, user }) {
           {!auth.authenticated && <LoginButton />}
           {auth.authenticated && (
             <div className="flex-col flex items-center text-lg text-center">
-              <p className="mb-5">Welcome back</p>
+              <p className="mb-5">{welcomeText}</p>
               <Button to="/notes" variant="simple" className="mb-5">
                 <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                   <Avatar image={user.avatar} className="mb-3" />

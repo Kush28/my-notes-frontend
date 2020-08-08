@@ -1,56 +1,70 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { FiPlus } from 'react-icons/fi'
 import Container from '../components/container/container'
 import Button from '../components/button/button'
 import Note from '../components/note/note'
 import { getAuthCookie } from '../utils/cookie'
 import { fetchAllNotesAction } from '../store/notes/notes.action'
-import SideMenu from '../components/sidemenu/SideMenu'
+import Layout from '../components/layout/layout'
+import { getFormattedDate } from '../utils/dateParser'
+import Avatar from '../components/avatar/avatar'
 
-function Notes({ notes, fetchNotes }) {
+function Notes({ user, notes, fetchNotes }) {
+  const [date, setDate] = useState(null)
   useEffect(() => {
+    setDate(new Date())
     fetchNotes(getAuthCookie())
   }, [])
 
   return (
-    <Container>
-      <SideMenu />
-      <div className="flex flex-col mb-5 mt-10">
-        <h1 className="font-bold mb-3">Add a new note</h1>
-        <Button
-          to="/notes/addnew"
-          variant="simple"
-          className="w-full p-3 text-gray text-left text-xs rounded shadow-small"
-        >
-          Start typing ...
-        </Button>
-      </div>
-
-      <div className="flex flex-col mt-5">
-        <h2 className="font-bold">Saved notes</h2>
-        {Object.keys(notes).map((key) => (
-          <React.Fragment key={key}>
-            <h3 className="text-xs text-gray text-right py-2">{key}</h3>
-            {notes[key].map((note) => (
+    <Layout>
+      <Container>
+        <div className="flex flex-row">
+          <div className="flex flex-col mb-5 w-3/4">
+            <p>{date && getFormattedDate(date, true).toUpperCase()}</p>
+            <p className="text-2xl">Today</p>
+          </div>
+          <div className="w-1/4 flex justify-end">
+            <Avatar image={user.avatar} />
+          </div>
+        </div>
+        <hr className="my-4" />
+        <div className="flex flex-col mt-5">
+          {notes.length === 0 ? (
+            <div className="flex h-64 text-center items-center px-10">
+              <p>Click on the + icon to add your fisrt note</p>
+            </div>
+          ) : (
+            notes.map((note) => (
               <Note
                 key={note._id}
                 id={note._id}
                 title={note.title}
                 body={note.body}
                 tags={note.tags}
+                createdAt={note.createdAt}
               />
-            ))}
-          </React.Fragment>
-        ))}
-      </div>
-    </Container>
+            ))
+          )}
+        </div>
+        <Button
+          to="/notes/addnew"
+          variant="simple"
+          className="fixed shadow-large rounded-full bg-primary text-2xl p-4 bottom-0 right-0 mr-8 mb-10"
+        >
+          <FiPlus />
+        </Button>
+      </Container>
+    </Layout>
   )
 }
 
-const mapStateToProps = ({ notes }) => ({
+const mapStateToProps = ({ notes, user }) => ({
   notes,
+  user,
 })
 
 const mapDispatchToProps = (dispatch) => ({
