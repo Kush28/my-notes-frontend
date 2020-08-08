@@ -7,7 +7,7 @@ function AddNewNote() {
   return (
     <Layout>
       <Container animationType="fromTop">
-        <div className="flex flex-col mt-4">
+        <div className="flex flex-col">
           <TakeNote />
         </div>
       </Container>

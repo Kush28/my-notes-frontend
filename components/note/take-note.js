@@ -8,6 +8,7 @@ import { createNote } from '../../api/notesApi'
 import { getAuthCookie } from '../../utils/cookie'
 import { authError } from '../../store/auth/auth.action'
 import Modal from '../modal/modal'
+import Loading from '../loading/loading'
 
 function TakeNote({ setAuthError }) {
   const [title, setTitle] = useState('')
@@ -16,6 +17,7 @@ function TakeNote({ setAuthError }) {
   const [tags, setTags] = useState([])
 
   const [saveSuccess, setSaveSuccess] = useState(false)
+  const [saveInProgress, setSaveProgress] = useState(false)
   const [formError, setFormError] = useState(false)
   const router = useRouter()
 
@@ -42,21 +44,29 @@ function TakeNote({ setAuthError }) {
       tags,
     }
     try {
+      setSaveProgress(true)
       await createNote(getAuthCookie(), noteData)
       setSaveSuccess(true)
+      setSaveProgress(false)
     } catch (error) {
       setAuthError(error)
+      setSaveProgress(false)
     }
   }
 
   return (
     <>
       {saveSuccess && (
-        <Modal closeHandler={() => router.push('/notes')}>
-          <p className="text-xl">Great!</p>
+        <Modal
+          title="Great!"
+          primaryButton="Okay"
+          okHandler={() => router.push('/notes')}
+          closeHandler={() => router.push('/notes')}
+        >
           <p>Your note have been saved.</p>
         </Modal>
       )}
+      <h1 className="text-xl mb-3">Start typing...</h1>
       <div className="rounded shadow-medium border border-1 border-graylight p-3 my-2">
         <input
           className="focus:outline-none w-full text-3xl mb-4"
@@ -88,11 +98,11 @@ function TakeNote({ setAuthError }) {
           <p>Please enter a Title and a Note</p>
         </div>
       )}
-      <div className="w-full flex flex-row justify-center text-center mt-5">
-        <Button className="mr-3" variant="primary" onClick={saveFormData}>
-          Save
+      <div className="w-full flex flex-row justify-center text-center mt-5 px-5">
+        <Button className="mr-3 w-2/4" variant="primary" onClick={saveFormData}>
+          {saveInProgress ? <Loading color="white" width="25px" /> : 'Save'}
         </Button>
-        <Button className="ml-3" variant="transparent" onClick={() => router.back()}>
+        <Button className="ml-3 w-2/4" variant="transparent" onClick={() => router.back()}>
           Cancel
         </Button>
       </div>

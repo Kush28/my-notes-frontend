@@ -18,8 +18,8 @@ const Navigation = ({ user }) => (
   <motion.ul className="absolute p-25 mt-20 w-full" variants={variants}>
     <MenuItem icon={<Avatar size="Smaller" image={user.avatar} />} text={user.name} />
     <MenuItem to="/" icon={<RiHome2Line />} text="Home" />
-    <MenuItem to="/" icon={<RiStickyNoteLine />} text="My Notes" />
-    <MenuItem to="/" icon={<RiMenuAddLine />} text="Add a Note" />
+    <MenuItem to="/notes" icon={<RiStickyNoteLine />} text="My Notes" />
+    <MenuItem to="/notes/addnew" icon={<RiMenuAddLine />} text="Add a Note" />
   </motion.ul>
 )
 

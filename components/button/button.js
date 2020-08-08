@@ -4,7 +4,7 @@ import Link from 'next/link'
 import styles from './button.style'
 
 export default function Button({ to, children, variant, className, ...other }) {
-  const consolidatedClass = `${styles[variant]} ${className || ''}`
+  const consolidatedClass = `${className || ''} ${styles[variant]}`
   if (!to)
     return (
       <button type="button" tabIndex="0" className={consolidatedClass} {...other}>

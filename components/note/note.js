@@ -1,5 +1,6 @@
+/* eslint-disable react/jsx-wrap-multilines */
 import React, { useState } from 'react'
-import { RiPushpin2Line, RiPushpinLine, RiDeleteBinLine } from 'react-icons/ri'
+import { RiPushpin2Line, RiPushpinLine, RiDeleteBinLine, RiDeleteBin5Line } from 'react-icons/ri'
 import ReactMarkdown from 'react-markdown/with-html'
 import Badge from '../badge/badge'
 import Button from '../button/button'
@@ -8,6 +9,7 @@ import Modal from '../modal/modal'
 import { getAuthCookie } from '../../utils/cookie'
 import { getFormattedDate } from '../../utils/dateParser'
 import Loading from '../loading/loading'
+import { AnimatePresence } from 'framer-motion'
 
 function Note({ id, title, body, tags, createdAt, postDelete }) {
   const [pinned, setPinned] = useState(false)
@@ -23,16 +25,24 @@ function Note({ id, title, body, tags, createdAt, postDelete }) {
   }
   return (
     <>
-      {deletePrompt && (
-        <Modal
-          primaryButton={isDeleting ? <Loading color="white" /> : 'Yes'}
-          secondaryButton="No"
-          okHandler={deleteHandler}
-          closeHandler={() => setDeletePrompt(false)}
-        >
-          <p>Are you sure?</p>
-        </Modal>
-      )}
+      <AnimatePresence exitBeforeEnter>
+        {deletePrompt && (
+          <Modal
+            title={
+              <>
+                <RiDeleteBin5Line className="text-2xl mb-3" />
+                <p>Delete Note</p>
+              </>
+            }
+            primaryButton={isDeleting ? <Loading color="white" /> : 'Yes'}
+            secondaryButton="No"
+            okHandler={deleteHandler}
+            closeHandler={() => setDeletePrompt(false)}
+          >
+            This is a permanant action. Deleted notes are lost forever.
+          </Modal>
+        )}
+      </AnimatePresence>
       <div className="rounded p-3 my-2 shadow-small">
         <div className="flex flex-row justify-between">
           <h3 className="font-medium pb-2 w-8/12">{title}</h3>

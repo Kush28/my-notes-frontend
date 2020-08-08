@@ -5,7 +5,7 @@ const colors = {
   white: '#FEFFFF',
 }
 
-function Loading({ color }) {
+function Loading({ color, height, width, className }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -16,10 +16,11 @@ function Loading({ color }) {
         display: 'block',
         shapeRendering: 'auto',
       }}
-      width="100%"
-      height="100%"
+      width={width}
+      height={height}
       viewBox="0 0 100 100"
       preserveAspectRatio="xMidYMid"
+      className={className}
     >
       <path
         fill="none"
@@ -44,6 +45,8 @@ function Loading({ color }) {
 
 Loading.defaultProps = {
   color: 'default',
+  height: '100%',
+  width: '100%',
 }
 
 export default Loading
