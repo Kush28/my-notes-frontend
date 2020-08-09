@@ -8,7 +8,6 @@ import Button from '../components/button/button'
 import Container from '../components/container/container'
 import { stagger, fadeInUp } from '../animations/fadeInUp'
 
-
 function Index({ auth, user }) {
   const [welcomeText, setWelcomeText] = useState('')
 

@@ -7,6 +7,6 @@ export const fetchAllNotesAction = (token) => async (dispatch) => {
     const { data } = await fetchAllNotes(token)
     dispatch({ type: actionTypes.NOTE_END_FETCH, payload: data })
   } catch (error) {
-    dispatch({ type: actionTypes.AUTH_FAILED, payload: error.response })
+    dispatch({ type: actionTypes.ERROR_SET })
   }
 }

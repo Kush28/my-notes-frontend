@@ -4,6 +4,7 @@ import thunkMiddleware from 'redux-thunk'
 import user from './user/user.reducer'
 import auth from './auth/auth.reducer'
 import notes from './notes/notes.reducer'
+import error from './error/error.reducer'
 
 const bindMiddleware = (middleware) => {
   return applyMiddleware(...middleware)
@@ -13,6 +14,7 @@ const combinedReducer = combineReducers({
   user,
   auth,
   notes,
+  error,
 })
 
 const reducer = (state, action) => {

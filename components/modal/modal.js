@@ -4,10 +4,18 @@ import { motion } from 'framer-motion'
 import Button from '../button/button'
 import { stagger, fadeIn, fadeInUp } from '../../animations/fadeInUp'
 
-function Modal({ title, children, okHandler, closeHandler, primaryButton, secondaryButton }) {
+function Modal({
+  title,
+  children,
+  okHandler,
+  closeHandler,
+  primaryButton,
+  secondaryButton,
+  color,
+}) {
   return (
     <div
-      className="fixed top-0 bottom-0 left-0 right-0 z-10 px-12 py-32 md:px-32 "
+      className="fixed top-0 bottom-0 left-0 right-0 z-10 px-12 py-20 md:px-32 "
       style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
     >
       <motion.div
@@ -25,7 +33,9 @@ function Modal({ title, children, okHandler, closeHandler, primaryButton, second
       </motion.div>
       <motion.div initial={{ scale: 0.5 }} animate={{ scale: 1 }} exit={{ scale: 0.5, opacity: 0 }}>
         <div className="rounded shadow-small bg-white">
-          <div className="flex flex-col justify-center items-center pt-10 pb-8 font-semibold text-center text-secondary text-xl">
+          <div
+            className={`flex flex-col justify-center items-center pt-10 pb-8 font-semibold text-center text-${color} text-xl`}
+          >
             {title}
           </div>
           <motion.div
@@ -38,18 +48,22 @@ function Modal({ title, children, okHandler, closeHandler, primaryButton, second
             <motion.div variants={fadeIn} className="mb-5 text-gray-800">
               {children}
             </motion.div>
-            <motion.div variants={fadeInUp} className="flex flex-row justify-center items-center">
+            <div className="flex flex-row justify-center items-center">
               {primaryButton && (
-                <Button variant="secondary-block" className="h-12" onClick={okHandler}>
-                  {primaryButton}
-                </Button>
+                <motion.div variants={fadeInUp}>
+                  <Button variant="secondary-block" className="h-12 w-20" onClick={okHandler}>
+                    {primaryButton}
+                  </Button>
+                </motion.div>
               )}
               {secondaryButton && (
-                <Button variant="transparent" className="h-12 ml-8" onClick={closeHandler}>
-                  {secondaryButton}
-                </Button>
+                <motion.div variants={fadeInUp}>
+                  <Button variant="transparent" className="h-12 w-20 ml-8" onClick={closeHandler}>
+                    {secondaryButton}
+                  </Button>
+                </motion.div>
               )}
-            </motion.div>
+            </div>
           </motion.div>
         </div>
       </motion.div>
@@ -59,6 +73,7 @@ function Modal({ title, children, okHandler, closeHandler, primaryButton, second
 
 Modal.defaultProps = {
   okHandler: () => {},
+  color: 'secondary',
 }
 
 export default Modal

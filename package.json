@@ -6,7 +6,8 @@
     "build": "next build",
     "start": "set NODE_ENV=production && node server.js",
     "export": "next build && next export",
-    "lint": "eslint */**.js --fix"
+    "lint": "eslint */**.js",
+    "lint:fix": "eslint */**/**.js --fix"
   },
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.10.4",

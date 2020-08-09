@@ -3,6 +3,9 @@ import { motion } from 'framer-motion'
 import Button from '../button/button'
 
 const variants = {
+  initial: {
+    opacity: 0,
+  },
   open: {
     y: 0,
     opacity: 1,
@@ -23,6 +26,7 @@ export const MenuItem = ({ to, icon, text }) => {
   return (
     <motion.li
       className="flex items-center mb-5 w-full"
+      initial="initial"
       variants={variants}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}

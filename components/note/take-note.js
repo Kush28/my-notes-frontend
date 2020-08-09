@@ -9,8 +9,9 @@ import { getAuthCookie } from '../../utils/cookie'
 import { authError } from '../../store/auth/auth.action'
 import Modal from '../modal/modal'
 import Loading from '../loading/loading'
+import { setError } from '../../store/error/error.action'
 
-function TakeNote({ setAuthError }) {
+function TakeNote({ setErrorAction }) {
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
   const [tagInput, setTagInput] = useState('')
@@ -49,7 +50,7 @@ function TakeNote({ setAuthError }) {
       setSaveSuccess(true)
       setSaveProgress(false)
     } catch (error) {
-      setAuthError(error)
+      setErrorAction()
       setSaveProgress(false)
     }
   }
@@ -66,7 +67,6 @@ function TakeNote({ setAuthError }) {
           <p>Your note have been saved.</p>
         </Modal>
       )}
-      <h1 className="text-xl mb-3">Start typing...</h1>
       <div className="rounded shadow-medium border border-1 border-graylight p-3 my-2">
         <input
           className="focus:outline-none w-full text-3xl mb-4"
@@ -99,7 +99,7 @@ function TakeNote({ setAuthError }) {
         </div>
       )}
       <div className="w-full flex flex-row justify-center text-center mt-5 px-5">
-        <Button className="mr-3 w-2/4" variant="primary" onClick={saveFormData}>
+        <Button className="mr-3 w-2/4" variant="primary-block" onClick={saveFormData}>
           {saveInProgress ? <Loading color="white" width="25px" /> : 'Save'}
         </Button>
         <Button className="ml-3 w-2/4" variant="transparent" onClick={() => router.back()}>
@@ -111,7 +111,7 @@ function TakeNote({ setAuthError }) {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  setAuthError: bindActionCreators(authError, dispatch),
+  setErrorAction: bindActionCreators(setError, dispatch),
 })
 
 export default connect(null, mapDispatchToProps)(TakeNote)

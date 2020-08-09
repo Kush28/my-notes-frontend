@@ -12,7 +12,7 @@ function Badge({ text, removable, onRemove }) {
   return (
     <div className="flex flex-row items-center bg-warning px-3 py-1 rounded-10 mr-2">
       <p className="text-xs mr-1">{text}</p>
-      <Button variant="transparent" onClick={onRemove}>
+      <Button variant="simple" onClick={onRemove}>
         <RiCloseLine />
       </Button>
     </div>
