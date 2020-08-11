@@ -63,7 +63,7 @@ function Index({ auth, user }) {
               <motion.p variants={fadeInUp} className="mb-5">
                 {welcomeText}
               </motion.p>
-              <Button to="/notes" variant="simple" className="mb-5">
+              <Button to="/notes" variant="simple" className="mb-5 text-center">
                 <motion.div
                   variants={fadeInUp}
                   whileHover={{ scale: 1.1 }}

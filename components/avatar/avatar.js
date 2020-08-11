@@ -1,4 +1,5 @@
 import React from 'react'
+import { FiUser } from 'react-icons/fi'
 
 const sizeClass = {
   Medium: 'h-16 w-16',
@@ -6,6 +7,8 @@ const sizeClass = {
 }
 
 export default function Avatar({ image, size, className }) {
+  if (!image) return <FiUser className={`${sizeClass[size]} ${className || ''}`} />
+
   return (
     <img
       src={image}

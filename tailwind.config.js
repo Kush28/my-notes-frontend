@@ -13,6 +13,9 @@ module.exports = {
       width: {
         300: '300px',
       },
+      height: {
+        36: '9.5rem',
+      },
       inset: {
         15: '15px',
         18: '18px',
