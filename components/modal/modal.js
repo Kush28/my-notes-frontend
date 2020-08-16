@@ -2,7 +2,7 @@ import React from 'react'
 import { RiCloseLine } from 'react-icons/ri'
 import { motion } from 'framer-motion'
 import Button from '../button/button'
-import { stagger, fadeIn, fadeInUp } from '../../animations/fadeInUp'
+import { fadeIn, fadeInUp } from '../../animations/fadeInUp'
 
 function Modal({
   title,
@@ -58,7 +58,7 @@ function Modal({
               )}
               {secondaryButton && (
                 <motion.div variants={fadeInUp}>
-                  <Button variant="transparent" className="h-12 w-24 ml-8" onClick={closeHandler}>
+                  <Button variant="transparent" className="h-12 w-24 ml-4" onClick={closeHandler}>
                     {secondaryButton}
                   </Button>
                 </motion.div>

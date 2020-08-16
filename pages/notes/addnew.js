@@ -8,7 +8,6 @@ function AddNewNote() {
     <Layout>
       <Container animationType="fromTop">
         <div className="flex flex-col">
-          <h1 className="text-xl mb-3">Start typing...</h1>
           <TakeNote />
         </div>
       </Container>

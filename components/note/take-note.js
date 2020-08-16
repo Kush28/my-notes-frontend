@@ -1,48 +1,38 @@
-import React, { useState } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import React, { useState, useRef, useEffect } from 'react'
+import { BsThreeDotsVertical } from 'react-icons/bs'
+import TextareaAutosize from 'react-textarea-autosize'
+import { RiSaveLine, RiErrorWarningLine } from 'react-icons/ri'
 import { useRouter } from 'next/router'
-import Badge from '../badge/badge'
 import Button from '../button/button'
+// import Tag from '../tag/tag'
+import FavButton from '../fav-button/fav-button'
 import { createNote } from '../../api/notesApi'
 import { getAuthCookie } from '../../utils/cookie'
-import { authError } from '../../store/auth/auth.action'
 import Modal from '../modal/modal'
 import Loading from '../loading/loading'
-import { setError } from '../../store/error/error.action'
 
-function TakeNote({ setErrorAction }) {
+function TakeNote() {
+  const router = useRouter()
+  const titleRef = useRef(null)
+  const [showMenu, setMenu] = useState(false)
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
-  const [tagInput, setTagInput] = useState('')
-  const [tags, setTags] = useState([])
-
   const [saveSuccess, setSaveSuccess] = useState(false)
   const [saveInProgress, setSaveProgress] = useState(false)
-  const [formError, setFormError] = useState(false)
-  const router = useRouter()
+  const [saveError, setSaveError] = useState(false)
 
-  const addNewTag = (e) => {
-    if (e.key === 'Enter') {
-      const { value } = e.target
-      if (!tags.includes(value)) setTags([...tags, value])
-      setTagInput('')
-    }
-  }
-
-  const removeTag = (tagToRemove) => {
-    setTags(tags.filter((tag) => tag !== tagToRemove))
-  }
+  useEffect(() => {
+    titleRef.current.focus()
+  }, [])
 
   const saveFormData = async () => {
     if (!title || !body) {
-      setFormError(true)
+      setSaveError(true)
       return
     }
     const noteData = {
       title,
       body,
-      tags,
     }
     try {
       setSaveProgress(true)
@@ -50,13 +40,52 @@ function TakeNote({ setErrorAction }) {
       setSaveSuccess(true)
       setSaveProgress(false)
     } catch (error) {
-      setErrorAction()
       setSaveProgress(false)
+      setSaveError(true)
     }
   }
 
   return (
     <>
+      <div className="flex flex-col">
+        <div className="mb-20">
+          <h1 className="text-xl font-bold pb-2">
+            <input
+              ref={titleRef}
+              className="focus:outline-none w-full text-3xl mb-4"
+              placeholder="Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </h1>
+          <div>
+            <TextareaAutosize
+              className="focus:outline-none w-full mb-4"
+              placeholder="Take a note ..."
+              value={body}
+              minRows={6}
+              onChange={(e) => setBody(e.target.value)}
+            />
+            {/* <div className="flex flex-row flex-wrap">
+                  <Tag text="Tag1" />
+                  <Tag text="Tag2" />
+                  <Tag text="Tag3" />
+                </div> */}
+          </div>
+        </div>
+        <div className="bg-white shadow-smallRevese fixed bottom-0 left-0 right-0 text-sm flex flex-row justify-between">
+          <div className="px-5 py-3">
+            <p>Edited on Nov 30, 2019</p>
+          </div>
+          <Button variant="transparent" className="px-5 py-3" onClick={() => setMenu(!showMenu)}>
+            <BsThreeDotsVertical />
+          </Button>
+        </div>
+        <FavButton
+          icon={saveInProgress ? <Loading color="white" width="25px" /> : <RiSaveLine />}
+          onClick={saveFormData}
+        />
+      </div>
       {saveSuccess && (
         <Modal
           title="Great!"
@@ -67,51 +96,23 @@ function TakeNote({ setErrorAction }) {
           <p>Your note have been saved.</p>
         </Modal>
       )}
-      <div className="rounded shadow-medium border border-1 border-graylight p-3 my-2">
-        <input
-          className="focus:outline-none w-full text-3xl mb-4"
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <textarea
-          className="focus:outline-none w-full mb-4 h-64"
-          placeholder="Take a note ..."
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
-        />
-        <input
-          className="focus:outline-none w-full mb-2"
-          placeholder="Enter a tag and press enter ..."
-          value={tagInput}
-          onChange={(e) => setTagInput(e.target.value)}
-          onKeyDown={addNewTag}
-        />
-        <div className="flex flex-row flex-wrap">
-          {tags.map((tag) => (
-            <Badge key={tag} text={tag} removable onRemove={() => removeTag(tag)} />
-          ))}
-        </div>
-      </div>
-      {formError && (
-        <div className="text-center mt-3 bg-error p-3 rounded">
-          <p>Please enter a Title and a Note</p>
-        </div>
+      {saveError && (
+        <Modal
+          title={
+            <>
+              <RiErrorWarningLine className="text-4xl mb-3" />
+              <p>Error!</p>
+            </>
+          }
+          primaryButton="Okay"
+          okHandler={() => setSaveError(false)}
+          closeHandler={() => setSaveError(false)}
+        >
+          <p>Add a title and a body to the note.</p>
+        </Modal>
       )}
-      <div className="w-full flex flex-row justify-center text-center mt-5 px-5">
-        <Button className="mr-3 w-2/4" variant="primary-block" onClick={saveFormData}>
-          {saveInProgress ? <Loading color="white" width="25px" /> : 'Save'}
-        </Button>
-        <Button className="ml-3 w-2/4" variant="transparent" onClick={() => router.back()}>
-          Cancel
-        </Button>
-      </div>
     </>
   )
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  setErrorAction: bindActionCreators(setError, dispatch),
-})
-
-export default connect(null, mapDispatchToProps)(TakeNote)
+export default TakeNote

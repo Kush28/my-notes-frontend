@@ -1,16 +1,16 @@
 import React from 'react'
-import Badge from './badge'
+import Tag from './tag'
 
-function BadgeWrapper({ tags }) {
+function TagWrapper({ tags }) {
   return (
     <div className="scrollbar-hidden flex scrolling-touch whitespace-no-wrap overflow-x-auto">
       {tags.map((tag) => (
         <div>
-          <Badge key={tag} text={tag} />
+          <Tag key={tag} text={tag} />
         </div>
       ))}
     </div>
   )
 }
 
-export default BadgeWrapper
+export default TagWrapper

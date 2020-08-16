@@ -16,6 +16,12 @@ module.exports = {
       height: {
         36: '9.5rem',
       },
+      maxHeight: {
+        '80vh': '80vh',
+      },
+      minHeight: {
+        20: '4rem',
+      },
       inset: {
         15: '15px',
         18: '18px',
@@ -25,6 +31,7 @@ module.exports = {
       },
       boxShadow: {
         small: '0 2px 5px rgba(0, 0, 0, 0.18)',
+        smallRevese: '0 -2px 5px rgba(0, 0, 0, 0.18)',
         medium: '0 3px 5px rgba(0,0,0,0.20)',
         large: '0 6px 10px rgba(0,0,0,0.40)',
       },

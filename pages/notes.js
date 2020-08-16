@@ -2,16 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { motion } from 'framer-motion'
+import { FiPlus } from 'react-icons/fi'
 import Container from '../components/container/container'
 import { getAuthCookie } from '../utils/cookie'
 import { fetchAllNotesAction } from '../store/notes/notes.action'
 import Layout from '../components/layout/layout'
 import { getFormattedDate } from '../utils/dateParser'
 import Avatar from '../components/avatar/avatar'
-// import Loading from '../components/loading/loading'
 import { fadeIn } from '../animations/fadeInUp'
 import NoteWrapper from '../components/note/note-wrapper'
-import AddButton from '../components/note/add-button'
+import FavButton from '../components/fav-button/fav-button'
 
 function Notes({ user, notes, fetchNotes }) {
   const [date, setDate] = useState(null)
@@ -54,7 +54,7 @@ function Notes({ user, notes, fetchNotes }) {
             <NoteWrapper notes={data} />
           )}
         </div>
-        <AddButton />
+        <FavButton icon={<FiPlus />} to="/notes/addnew" />
       </Container>
     </Layout>
   )

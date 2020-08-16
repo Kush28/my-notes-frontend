@@ -25,6 +25,18 @@ export const fetchAllNotes = (token) =>
     },
   })
 
+export const fetchNoteById = (token, id) =>
+  Axios({
+    url: `${endPointUrl}/note/fetch`,
+    method: 'get',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    data: {
+      id,
+    },
+  })
+
 export const deleteNote = (token, id) =>
   Axios({
     url: `${endPointUrl}/note/delete`,
