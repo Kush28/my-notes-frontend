@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { useState, useRef, useEffect } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import TextareaAutosize from 'react-textarea-autosize'
@@ -10,6 +11,7 @@ import { createNote } from '../../api/notesApi'
 import { getAuthCookie } from '../../utils/cookie'
 import Modal from '../modal/modal'
 import Loading from '../loading/loading'
+import { getCurrTime } from '../../utils/dateParser'
 
 function TakeNote() {
   const router = useRouter()
@@ -20,9 +22,11 @@ function TakeNote() {
   const [saveSuccess, setSaveSuccess] = useState(false)
   const [saveInProgress, setSaveProgress] = useState(false)
   const [saveError, setSaveError] = useState(false)
+  const [currentTime, setCurrTime] = useState(null)
 
   useEffect(() => {
     titleRef.current.focus()
+    setCurrTime(getCurrTime())
   }, [])
 
   const saveFormData = async () => {
@@ -75,7 +79,11 @@ function TakeNote() {
         </div>
         <div className="bg-white shadow-smallRevese fixed bottom-0 left-0 right-0 text-sm flex flex-row justify-between">
           <div className="px-5 py-3">
-            <p>Edited on Nov 30, 2019</p>
+            <p>
+              Edited
+              {' '}
+              {currentTime}
+            </p>
           </div>
           <Button variant="transparent" className="px-5 py-3" onClick={() => setMenu(!showMenu)}>
             <BsThreeDotsVertical />

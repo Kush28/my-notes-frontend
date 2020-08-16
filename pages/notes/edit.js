@@ -12,7 +12,7 @@ function EditNote({ data }) {
   return (
     <Layout>
       <Container>
-        <TakeNote/>
+        <TakeNote />
       </Container>
     </Layout>
   )
