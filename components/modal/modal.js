@@ -42,7 +42,7 @@ function Modal({
             initial="initial"
             animate="animate"
             transition={{ delay: 0.5 }}
-            variants={stagger}
+            // variants={stagger}
             className="flex flex-col justify-center items-center bg-graylight border-t border-gray-400 py-10 px-10"
           >
             <motion.div variants={fadeIn} className="mb-5 text-gray-800">
@@ -51,14 +51,14 @@ function Modal({
             <div className="flex flex-row justify-center items-center">
               {primaryButton && (
                 <motion.div variants={fadeInUp}>
-                  <Button variant="secondary-block" className="h-12 w-20" onClick={okHandler}>
+                  <Button variant="secondary-block" className="h-12 w-24" onClick={okHandler}>
                     {primaryButton}
                   </Button>
                 </motion.div>
               )}
               {secondaryButton && (
                 <motion.div variants={fadeInUp}>
-                  <Button variant="transparent" className="h-12 w-20 ml-8" onClick={closeHandler}>
+                  <Button variant="transparent" className="h-12 w-24 ml-8" onClick={closeHandler}>
                     {secondaryButton}
                   </Button>
                 </motion.div>

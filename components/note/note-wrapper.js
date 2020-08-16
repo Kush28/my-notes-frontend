@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Note from './note'

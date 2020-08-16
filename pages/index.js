@@ -57,7 +57,11 @@ function Index({ auth, user }) {
           variants={stagger}
           className="flex-row flex"
         >
-          {!auth.authenticated && <LoginButton />}
+          {!auth.authenticated && (
+            <motion.span variants={fadeInUp}>
+              <LoginButton />
+            </motion.span>
+          )}
           {auth.authenticated && (
             <div className="flex-col flex items-center text-lg text-center">
               <motion.p variants={fadeInUp} className="mb-5">

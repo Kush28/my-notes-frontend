@@ -8,7 +8,7 @@ import { fetchAllNotesAction } from '../store/notes/notes.action'
 import Layout from '../components/layout/layout'
 import { getFormattedDate } from '../utils/dateParser'
 import Avatar from '../components/avatar/avatar'
-import Loading from '../components/loading/loading'
+// import Loading from '../components/loading/loading'
 import { fadeIn } from '../animations/fadeInUp'
 import NoteWrapper from '../components/note/note-wrapper'
 import AddButton from '../components/note/add-button'
@@ -37,11 +37,11 @@ function Notes({ user, notes, fetchNotes }) {
         </div>
         <hr className="my-4" />
         <div className="flex flex-col mt-5">
-          {isFetching && !fetched && (
+          {/* {isFetching && !fetched && (
             <div className="flex h-64 text-center justify-center items-center px-16">
               <Loading />
             </div>
-          )}
+          )} */}
           {!isFetching && fetched && data.length === 0 ? (
             <motion.div variant={fadeIn} className="flex h-64 text-center items-center px-10">
               <p>

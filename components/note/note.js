@@ -47,23 +47,23 @@ function Note({ id, title, body, createdAt, postDelete }) {
           </Modal>
         )}
       </AnimatePresence>
-      <Button to={`/notes/edit?id=${id}`}>
-        <motion.div variants={fadeInUp} className="rounded p-3 my-2 shadow-small h-56">
-          <div className="flex flex-row justify-between ">
-            <h3 className="font-medium pb-2 w-8/12 truncate">{title}</h3>
-            <div className="ml-1 w-4/12 text-right">
-              {/* <Button variant="transparent" className="p-2" onClick={() => setPinned(!pinned)}>
+      <motion.div variants={fadeInUp} className="rounded p-3 my-2 shadow-small h-56">
+        <div className="flex flex-row justify-between ">
+          <h3 className="font-medium pb-2 w-8/12 truncate">{title}</h3>
+          <div className="ml-1 w-4/12 text-right">
+            {/* <Button variant="transparent" className="p-2" onClick={() => setPinned(!pinned)}>
                 {pinned ? <RiPushpinLine /> : <RiPushpin2Line />}
               </Button> */}
-              <Button
-                variant="transparent"
-                className="p-2 text-error"
-                onClick={() => setDeletePrompt(true)}
-              >
-                <RiDeleteBinLine />
-              </Button>
-            </div>
+            <Button
+              variant="transparent"
+              className="p-2 text-error"
+              onClick={() => setDeletePrompt(true)}
+            >
+              <RiDeleteBinLine />
+            </Button>
           </div>
+        </div>
+        <Button to={`/notes/edit?id=${id}`}>
           <div className="text-sm pb-3 h-36 overflow-hidden">
             <ReactMarkdown source={body} />
           </div>
@@ -72,8 +72,8 @@ function Note({ id, title, body, createdAt, postDelete }) {
               {getFormattedDate(new Date(createdAt))}
             </div>
           </div>
-        </motion.div>
-      </Button>
+        </Button>
+      </motion.div>
     </>
   )
 }
