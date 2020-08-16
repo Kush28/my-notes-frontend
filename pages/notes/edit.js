@@ -1,30 +1,57 @@
-/* eslint-disable */
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import Container from '../../components/container/container'
 import Layout from '../../components/layout/layout'
-import { fetchNoteById } from '../../api/notesApi'
-import { getAuthCookieFromServer } from '../../utils/cookie'
+import { fetchNoteById, updateNote } from '../../api/notesApi'
+import { getAuthCookie } from '../../utils/cookie'
 import TakeNote from '../../components/note/take-note'
 
-function EditNote({ data }) {
-  console.log(data)
+import { setError } from '../../store/error/error.action'
+
+function EditNote({ setGlobalError }) {
+  const router = useRouter()
+  const noteId = router.query && router.query.id
+
+  const [data, setData] = useState({})
+
+  useEffect(() => {
+    const getDataFromAPI = async () => {
+      try {
+        const noteData = await fetchNoteById(getAuthCookie(), noteId)
+        setData(noteData.data)
+      } catch (error) {
+        setGlobalError()
+      }
+    }
+    getDataFromAPI()
+  }, [])
+
+  const { body, title, updatedAt } = data
+
+  const onUpdate = async (noteData) => {
+    await updateNote(getAuthCookie(), { id: noteId, ...noteData })
+  }
 
   return (
     <Layout>
       <Container>
-        <TakeNote />
+        <TakeNote
+          loading={data === {}}
+          body={body}
+          title={title}
+          lastModified={updatedAt && new Date(updatedAt)}
+          onSave={onUpdate}
+          postSave={() => router.push('/notes')}
+        />
       </Container>
     </Layout>
   )
 }
 
-export async function getServerSideProps({ req, query }) {
-  let noteData = {}
-  const noteId = query && query.id
-  noteData = await fetchNoteById(getAuthCookieFromServer(req), noteId)
-  return {
-    props: { data: noteData.data },
-  }
-}
+const mapDispatchToProps = (dispatch) => ({
+  setGlobalError: bindActionCreators(setError, dispatch),
+})
 
-export default EditNote
+export default connect(null, mapDispatchToProps)(EditNote)

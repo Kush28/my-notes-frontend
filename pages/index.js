@@ -68,16 +68,18 @@ function Index({ auth, user }) {
                 {welcomeText}
               </motion.p>
               <Button to="/notes" variant="simple" className="mb-5 text-center">
-                <motion.div
-                  variants={fadeInUp}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <Avatar image={user.avatar} className="mb-3" />
-                </motion.div>
-                <motion.p variants={fadeInUp} className="text-sm">
-                  {user.name}
-                </motion.p>
+                <div className="flex flex-col items-center">
+                  <motion.div
+                    variants={fadeInUp}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <Avatar image={user.avatar} className="mb-3" />
+                  </motion.div>
+                  <motion.p variants={fadeInUp} className="text-sm">
+                    {user.name}
+                  </motion.p>
+                </div>
               </Button>
               <Button variant="simple">
                 <motion.p variants={fadeInUp} className="text-xs text-gray">

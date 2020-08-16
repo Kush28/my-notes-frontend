@@ -3,9 +3,9 @@ import { motion } from 'framer-motion'
 import { slideLeftAnim } from '../../animations/slideLeft'
 import Button from '../button/button'
 
-function FavButton({ icon, animation, to, onClick }) {
+function FavButton({ icon, animation, to, onClick, disabled }) {
   return (
-    <Button to={to} onClick={onClick}>
+    <Button to={to} onClick={onClick} disabled={disabled} className={disabled && 'cursor-wait'}>
       <motion.span
         initial="initial"
         animate="animate"
@@ -22,6 +22,7 @@ function FavButton({ icon, animation, to, onClick }) {
 
 FavButton.defaultProps = {
   animation: slideLeftAnim,
+  disabled: false,
 }
 
 export default FavButton

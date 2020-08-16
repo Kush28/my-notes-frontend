@@ -10,3 +10,7 @@ export const fetchAllNotesAction = (token) => async (dispatch) => {
     dispatch({ type: actionTypes.ERROR_SET })
   }
 }
+
+export const setAllNotes = (data) => (dispatch) => {
+  dispatch({ type: actionTypes.NOTE_END_FETCH, payload: data })
+}

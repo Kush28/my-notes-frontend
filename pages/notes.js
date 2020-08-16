@@ -37,14 +37,9 @@ function Notes({ user, notes, fetchNotes }) {
         </div>
         <hr className="my-4" />
         <div className="flex flex-col mt-5">
-          {/* {isFetching && !fetched && (
-            <div className="flex h-64 text-center justify-center items-center px-16">
-              <Loading />
-            </div>
-          )} */}
           {!isFetching && fetched && data.length === 0 ? (
             <motion.div variant={fadeIn} className="flex h-64 text-center items-center px-10">
-              <p>
+              <p className="w-full">
                 <span>Click on the</span>
                 <span className="font-bold"> + </span>
                 <span>icon to add your first note</span>

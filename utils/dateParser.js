@@ -22,14 +22,20 @@ export const getFormattedDate = (dateObj, long = false) => {
   return `${day}, ${month} ${date}`
 }
 
-export const getCurrTime = () => {
-  const currDate = new Date()
-  let hours = currDate.getHours()
-  let minutes = currDate.getMinutes()
+export const getFormatedTime = (dateObj) => {
+  let hours = dateObj.getHours()
+  let minutes = dateObj.getMinutes()
   const ampm = hours >= 12 ? 'pm' : 'am'
   hours %= 12
   hours = hours || 12
   minutes = minutes < 10 ? `0${minutes}` : minutes
   const strTime = `${hours}:${minutes} ${ampm}`
-  return strTime
+  const currDate = new Date()
+  if (
+    currDate.getDate() === dateObj.getDate() &&
+    currDate.getMonth() === dateObj.getMonth() &&
+    currDate.getFullYear() === dateObj.getFullYear()
+  )
+    return strTime
+  return `${getFormattedDate(dateObj, true)}, ${strTime} `
 }
