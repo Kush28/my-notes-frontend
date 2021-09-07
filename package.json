@@ -31,7 +31,7 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "remark": "11.0.2",
-    "remark-html": "10.0.0",
+    "remark-html": "13.0.2",
     "tailwindcss": "^1.4.0"
   },
   "devDependencies": {
